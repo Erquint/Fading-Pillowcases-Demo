@@ -3,7 +3,6 @@ class Fader
   @@faders = []
   
   def initialize solid
-    puts "solid(#{args.state.tick_count}):\n #{solid.to_s}"
     @solid = solid
     @fresh = true
     @solid[:a] = 55
@@ -25,8 +24,6 @@ class Fader
 end
 
 def tick args
-  args.state.Fader ||= Fader
-  
   args.state.solids.pillowcase ||= {}
   
   if args.inputs.mouse.down # Tracking mouse drag initial position…
@@ -36,7 +33,6 @@ def tick args
     args.state.inputs.mouse.held.point = nil
     
     if args.state.solids.pillowcase # Making the current pillowcase a new fader.
-      puts "args.state.solids.pillowcase.class(#{args.state.tick_count}):\n #{args.state.solids.pillowcase.class.to_s}"
       Fader.new args.state.solids.pillowcase
       args.state.solids.pillowcase = nil
     end
